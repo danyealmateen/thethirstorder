@@ -1,0 +1,61 @@
+/* The Thirst Order – SWTOR guild, Star Wars HUD theme */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --bg: #000000;
+    --accent: #00CCFF;
+    --accent-glow: rgba(0, 204, 255, 0.5);
+    --accent-bright: #99FFFF;
+    --font-display: 'Orbitron', sans-serif;
+    --font-mono: 'Share Tech Mono', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    margin: 0;
+    min-height: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background-color: var(--bg);
+    background-image: url('/images/landing_page_wallpaper.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    color: var(--accent);
+    text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
+    letter-spacing: 0.05em;
+}
+
+p, span {
+    color: var(--accent);
+    text-shadow: 0 0 6px var(--accent-glow);
+}
+
+a {
+    color: var(--accent-bright);
+    text-decoration: none;
+    text-shadow: 0 0 8px var(--accent-glow);
+}
+
+a:hover {
+    color: var(--accent);
+    text-shadow: 0 0 12px var(--accent-glow), 0 0 24px var(--accent-glow);
+}

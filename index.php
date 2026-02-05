@@ -1,2 +1,3 @@
 <?php
-echo "yup, the thirst order domain & server is up and running!!!!";
+require __DIR__ . '/src/Core/Router.php';
+\Core\Router::dispatch(require __DIR__ . '/src/Core/routes.php');

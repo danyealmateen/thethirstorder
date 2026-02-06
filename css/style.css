@@ -152,7 +152,7 @@ body::after {
 /* FULL SWTOR IMPERIAL HUD FRAME (separate overlay div)   */
 /* ===================================================== */
 /* ::before = scanlines, ::after = flicker + sweep       */
-/* .hud-frame = border + corner brackets + pulse glow    */
+/* .hud-frame = border + pulse glow                      */
 /* ===================================================== */
 
 .hud-frame {
@@ -168,21 +168,6 @@ body::after {
         inset 0 0 40px rgba(255, 0, 0, 0.15);
 
     animation: hudpulse 4s ease-in-out infinite;
-
-    /* Corner brackets */
-    background:
-        linear-gradient(to right, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top left,
-        linear-gradient(to bottom, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top left,
-        linear-gradient(to left, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top right,
-        linear-gradient(to bottom, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top right,
-        linear-gradient(to right, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom left,
-        linear-gradient(to top, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom left,
-        linear-gradient(to left, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom right,
-        linear-gradient(to top, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom right;
-
-    background-repeat: no-repeat;
-    background-size: 60px 60px;
-    mix-blend-mode: screen;
 }
 
 @keyframes hudpulse {

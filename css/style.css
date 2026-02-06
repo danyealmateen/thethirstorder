@@ -45,7 +45,9 @@ body {
     padding: 0 var(--body-padding);
 
     background-color: var(--bg);
-    background-image: url('/images/landing_page_wallpaper.png');
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.78)),
+        url('/images/landing_page_wallpaper.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

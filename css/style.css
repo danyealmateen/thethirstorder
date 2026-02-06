@@ -4,11 +4,15 @@
 
 :root {
     --bg: #000000;
-    --accent: #00CCFF;
-    --accent-glow: rgba(0, 204, 255, 0.5);
-    --accent-bright: #99FFFF;
+
+    /* Sith terminal red */
+    --accent: #ff2222;
+    --accent-glow: rgba(255, 0, 0, 0.6);
+    --accent-bright: #ff6666;
+
     --font-display: 'Orbitron', sans-serif;
     --font-mono: 'Share Tech Mono', monospace;
+
     --body-padding: 1rem;
 }
 
@@ -19,7 +23,6 @@
 html {
     height: 100%;
     overflow-x: hidden;
-    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -28,61 +31,108 @@ body {
     height: 100%;
     overflow-x: hidden;
     padding: 0 var(--body-padding);
+
     background-color: var(--bg);
     background-image: url('/images/landing_page_wallpaper.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
+
     color: var(--accent);
     font-family: var(--font-mono);
-    font-weight: 400;
-    font-size: clamp(0.9375rem, 2.5vw, 1rem);
-    line-height: 1.5;
+
+    position: relative;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display);
-    font-weight: 400;
-    color: var(--accent);
-    text-shadow: 0 0 10px var(--accent-glow), 0 0 20px var(--accent-glow);
-    letter-spacing: 0.05em;
+/* ===================================================== */
+/* FIX: Ensure page content is above overlays             */
+/* ===================================================== */
+
+body > * {
+    position: relative;
+    z-index: 2;
 }
 
-h1 { font-size: clamp(1.5rem, 5vw, 2.25rem); }
-h2 { font-size: clamp(1.25rem, 4vw, 1.75rem); }
-h3 { font-size: clamp(1.125rem, 3vw, 1.5rem); }
-img, video, iframe {
-    max-width: 100%;
-    height: auto;
+/* ===================================================== */
+/* TERMINAL OVERLAY EFFECTS (VISIBLE NOW)                 */
+/* ===================================================== */
+
+/* ===================================================== */
+/* TERMINAL OVERLAY EFFECTS (ENHANCED)                    */
+/* ===================================================== */
+
+body::before,
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
 }
 
-p, span {
-    color: var(--accent);
-    text-shadow: 0 0 6px var(--accent-glow);
+/* ---------------- Scanlines ---------------- */
+
+body::before {
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 0, 0, 0.10),
+        rgba(255, 0, 0, 0.10) 1px,
+        transparent 2px,
+        transparent 7px
+    );
+
+    animation: scanmove 2.2s linear infinite;
+    opacity: 0.45;
 }
 
-a {
-    color: var(--accent-bright);
-    text-decoration: none;
-    text-shadow: 0 0 8px var(--accent-glow);
+@keyframes scanmove {
+    from { transform: translateY(0); }
+    to   { transform: translateY(90px); }
 }
 
-a:hover {
-    color: var(--accent);
-    text-shadow: 0 0 12px var(--accent-glow), 0 0 24px var(--accent-glow);
+/* ---------------- Flicker + Noise + Sweep Scan ---------------- */
+
+body::after {
+    background:
+        /* Sweep scan bar */
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(255, 0, 0, 0.15) 45%,
+            rgba(255, 50, 50, 0.35) 50%,
+            rgba(255, 0, 0, 0.15) 55%,
+            transparent 100%
+        );
+
+    background-size: 100% 200%;
+    opacity: 0.20;
+
+    animation:
+        flicker 2.8s infinite,
+        noise 0.18s infinite,
+        sweep 6s linear infinite;
 }
 
-@media (max-width: 768px) {
-    :root {
-        --body-padding: 1rem;
-    }
-    body {
-        background-attachment: scroll;
-    }
+/* Flicker (slightly stronger) */
+@keyframes flicker {
+    0%, 100% { opacity: 0.18; }
+    50%      { opacity: 0.35; }
+    65%      { opacity: 0.12; }
+    80%      { opacity: 0.28; }
 }
 
-@media (max-width: 480px) {
-    :root {
-        --body-padding: 0.75rem;
-    }
+/* Noise vibration */
+@keyframes noise {
+    0%   { transform: translate(0,0); }
+    25%  { transform: translate(1px,-1px); }
+    50%  { transform: translate(-1px,1px); }
+    75%  { transform: translate(2px,0); }
+    100% { transform: translate(0,0); }
 }
+
+/* Sweep scan line moving down */
+@keyframes sweep {
+    from { background-position: 0 -100%; }
+    to   { background-position: 0 200%; }
+}
+

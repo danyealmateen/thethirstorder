@@ -1,5 +1,14 @@
 /* The Thirst Order – SWTOR guild, Star Wars HUD theme */
 
+@font-face {
+    font-family: 'Friz Quadrata TT';
+    src: url('/fonts/FrizQuadrataTT.woff2') format('woff2'),
+         url('/fonts/FrizQuadrataTT.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
 
 :root {
@@ -10,7 +19,10 @@
     --accent-glow: rgba(255, 0, 0, 0.6);
     --accent-bright: #ff6666;
 
-    --font-display: 'Orbitron', sans-serif;
+    /* Readable text on dark + red: warm off-white */
+    --text: #eae6e6;
+
+    --font-display: 'Friz Quadrata TT', Georgia, 'Times New Roman', serif;
     --font-mono: 'Share Tech Mono', monospace;
 
     --body-padding: 1rem;
@@ -38,8 +50,8 @@ body {
     background-position: center;
     background-attachment: fixed;
 
-    color: var(--accent);
-    font-family: var(--font-mono);
+    color: var(--text);
+    font-family: var(--font-display);
 
     position: relative;
 }

@@ -48,7 +48,7 @@ body {
 /* FIX: Ensure page content is above overlays             */
 /* ===================================================== */
 
-body > * {
+body > *:not(.hud-frame) {
     position: relative;
     z-index: 2;
 }
@@ -98,18 +98,18 @@ body::after {
         linear-gradient(
             to bottom,
             transparent 0%,
-            rgba(255, 0, 0, 0.15) 45%,
-            rgba(255, 50, 50, 0.35) 50%,
-            rgba(255, 0, 0, 0.15) 55%,
+            rgba(255, 0, 0, 0.22) 45%,
+            rgba(255, 50, 50, 0.55) 50%,
+            rgba(255, 0, 0, 0.22) 55%,
             transparent 100%
         );
 
     background-size: 100% 200%;
-    opacity: 0.20;
+    opacity: 0.28;
 
     animation:
         flicker 2.8s infinite,
-        noise 0.18s infinite,
+        noise 0.12s infinite,
         sweep 6s linear infinite;
 }
 
@@ -123,11 +123,11 @@ body::after {
 
 /* Noise vibration */
 @keyframes noise {
-    0%   { transform: translate(0,0); }
-    25%  { transform: translate(1px,-1px); }
-    50%  { transform: translate(-1px,1px); }
-    75%  { transform: translate(2px,0); }
-    100% { transform: translate(0,0); }
+    0%   { transform: translate(0, 0); }
+    25%  { transform: translate(2px, -2px); }
+    50%  { transform: translate(-2px, 2px); }
+    75%  { transform: translate(3px, 0); }
+    100% { transform: translate(0, 0); }
 }
 
 /* Sweep scan line moving down */
@@ -136,3 +136,44 @@ body::after {
     to   { background-position: 0 200%; }
 }
 
+/* ===================================================== */
+/* FULL SWTOR IMPERIAL HUD FRAME (separate overlay div)   */
+/* ===================================================== */
+/* ::before = scanlines, ::after = flicker + sweep       */
+/* .hud-frame = border + corner brackets + pulse glow    */
+/* ===================================================== */
+
+.hud-frame {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+
+    /* SWTOR HUD border */
+    border: 2px solid rgba(255, 0, 0, 0.35);
+    box-shadow:
+        0 0 25px rgba(255, 0, 0, 0.25),
+        inset 0 0 40px rgba(255, 0, 0, 0.15);
+
+    animation: hudpulse 4s ease-in-out infinite;
+
+    /* Corner brackets */
+    background:
+        linear-gradient(to right, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top left,
+        linear-gradient(to bottom, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top left,
+        linear-gradient(to left, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top right,
+        linear-gradient(to bottom, rgba(255, 0, 0, 0.9) 3px, transparent 3px) top right,
+        linear-gradient(to right, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom left,
+        linear-gradient(to top, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom left,
+        linear-gradient(to left, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom right,
+        linear-gradient(to top, rgba(255, 0, 0, 0.9) 3px, transparent 3px) bottom right;
+
+    background-repeat: no-repeat;
+    background-size: 60px 60px;
+    mix-blend-mode: screen;
+}
+
+@keyframes hudpulse {
+    0%, 100% { opacity: 0.65; }
+    50%      { opacity: 1; }
+}

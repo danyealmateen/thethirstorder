@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <div class="hud-frame" aria-hidden="true"></div>
     <p>landing page</p>
 </body>
 </html>
